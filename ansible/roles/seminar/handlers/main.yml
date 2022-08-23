@@ -1,0 +1,7 @@
+---
+# handlers file for seminar
+- name: restart_nginx
+  ansible.builtin.service:
+    name: nginx
+    state: restarted
+  become: yes

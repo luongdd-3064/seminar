@@ -1,0 +1,43 @@
+---
+# tasks file for seminar
+- name: SEMINAR > Install service nginx
+  apt:
+    name: nginx
+    state: present
+  become: true
+
+- name: SEMINAR > Copy nginx.conf file
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    owner: bin
+    group: root
+    mode: '0644'
+  notify: restart_nginx
+  become: yes
+
+- name: SEMINAR > Copy index nginx file
+  template:
+    src: index.html.j2
+    dest: /etc/nginx/conf.d/index.html
+    owner: bin
+    group: root
+    mode: '0644'
+  notify: restart_nginx
+  become: yes
+
+- name: SEMINAR > Copy nginx config file
+  template:
+    src: seminar.conf.j2
+    dest: /etc/nginx/conf.d/seminar.conf
+    owner: bin
+    group: root
+    mode: '0644'
+  notify: restart_nginx
+  become: yes
+
+# - name: restart_nginx
+#   ansible.builtin.service:
+#     name: nginx
+#     state: restarted
+#   become: yes

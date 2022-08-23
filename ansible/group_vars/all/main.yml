@@ -1,0 +1,3 @@
+# User ssh to server
+ansible_ssh_user: "ubuntu"
+# index_content: "Welcom to sminar /ansible/group_vars/all"
